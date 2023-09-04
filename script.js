@@ -26,46 +26,45 @@ function playRound(playerSelection, computerSelection) {
 
   let caseInsenstivePS = capitalize(playerSelection);
 
-  if (caseInsenstivePS === computerSelection){
+  if (caseInsenstivePS === computerSelection) {
     return "You tied!";
-  }
-  else if (caseInsenstivePS === "Rock"){
-    return computerSelection === "Scissors" ? youWin + rockWin : youLose + paperWin;
-  }
-  else if (caseInsenstivePS === "Paper"){
-    return computerSelection === "Rock" ? youWin + paperWin : youLose + scissorsWin;
-  }
-  else if (caseInsenstivePS === "Scissors"){
-    return computerSelection === "Paper" ? youWin + scissorsWin : youLose + rockWin;
-  }
-  else{
+  } else if (caseInsenstivePS === "Rock") {
+    return computerSelection === "Scissors"
+      ? youWin + rockWin
+      : youLose + paperWin;
+  } else if (caseInsenstivePS === "Paper") {
+    return computerSelection === "Rock"
+      ? youWin + paperWin
+      : youLose + scissorsWin;
+  } else if (caseInsenstivePS === "Scissors") {
+    return computerSelection === "Paper"
+      ? youWin + scissorsWin
+      : youLose + rockWin;
+  } else {
     return "Error!";
   }
-
 }
 
-
-
 function game(){
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++){
-        const playerSelection = prompt("Enter your decision here");
-        const computerSelection = getComputerChoice();
-        let round = playRound(playerSelection, computerSelection);
-        let decision = round.slice(0,8);
-        if (decision === "You Win!"){
-            playerScore++;
-        }
-        else{
-            computerScore++;
-        }
-    }
-    if (playerScore > computerScore){
-        return "You win the best of 5 games!";
-    }else{
-        return "You lose the best of 5 games!";
-    }
+  let playerScore = 0;
+  let computerScore = 0;
+  for (let i = 0; i < 5; i++){
+      const playerSelection = prompt("Enter your decision here");
+      const computerSelection = getComputerChoice();
+      let round = playRound(playerSelection, computerSelection);
+      let decision = round.slice(0,8);
+      if (decision === "You Win!"){
+          playerScore++;
+      }
+      else{
+          computerScore++;
+      }
+  }
+  if (playerScore > computerScore){
+      return "You win the best of 5 games!";
+  }else{
+      return "You lose the best of 5 games!";
+  }
 }
 
 console.log(game());
