@@ -49,8 +49,12 @@ function playRound(playerSelection, computerSelection) {
 function game(){
     let playerScore = 0;
     let computerScore = 0;
-    for (let i = 0; i < 5; i++){
-        const playerSelection = prompt("Enter your decision here");
+    //for (let i = 0; i < 5; i++){
+        //const playerSelection = prompt("Enter your decision here");
+        const buttons = document.querySelectorAll('button');
+
+        buttons.forEach(button => button.addEventListener('click', ))
+        
         const computerSelection = getComputerChoice();
         let round = playRound(playerSelection, computerSelection);
         let decision = round.slice(0,8);
@@ -60,12 +64,10 @@ function game(){
         else{
             computerScore++;
         }
-    }
+    //}
     if (playerScore > computerScore){
         return "You win the best of 5 games!";
     }else{
         return "You lose the best of 5 games!";
     }
-}
-
-console.log(game());
+  }
