@@ -48,40 +48,51 @@ function playRound(playerSelection, computerSelection) {
 let playerScore = 0;
 let computerScore = 0;
 
-function displayScore(result){
-  const playerScoreRef = document.querySelector('.playerScore');
-  const compScoreRef = document.querySelector('.computerScore');
-  const roundRef = document.querySelector('.round-message');
+function displayScore(result) {
+  const playerScoreRef = document.querySelector(".playerScore");
+  const compScoreRef = document.querySelector(".computerScore");
+  const roundRef = document.querySelector(".round-message");
+
   playerScoreRef.textContent = `${playerScore}`;
   compScoreRef.textContent = `${computerScore}`;
-  roundRef.textContent = result
+  roundRef.textContent = result;
+
+  if (Math.max(playerScore, computerScore) === 5) {
+    const div = document.createElement("div");
+    div.classList.add("winner");
+
+    if (result.includes("You Win")) {
+      div.textContent =
+        "Good job! You beat the computer in first to win 5 rounds!";
+    } else {
+      div.textContent =
+        "Unfortunately, the computer has beaten you to the first to win 5 rounds.";
+    }
+    roundRef.appendChild(div);
+  }
 }
 
-function handleMove(playerInput){
-  let computerSelection = getComputerChoice();
-  let result = playRound(playerInput, computerSelection);
-  if (result.includes("You tied")){
-    
+function handleMove(playerInput) {
+  if (Math.max(computerScore, playerScore) === 5) {
+  } else {
+    let computerSelection = getComputerChoice();
+    let result = playRound(playerInput, computerSelection);
+    if (result.includes("You tied")) {
+    } else if (result.includes("You Win")) {
+      playerScore++;
+    } else {
+      computerScore++;
+    }
+    displayScore(result);
   }
-  else if (result.includes("You Win")){
-    playerScore++
-  }
-  else{
-    computerScore++;
-  }
-  displayScore(result);
 }
 
 displayScore();
 
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll("button");
 
 buttons.forEach((button) => {
-  button.addEventListener('click', () => {
+  button.addEventListener("click", () => {
     handleMove(button.className);
   });
 });
-
-
-
-
