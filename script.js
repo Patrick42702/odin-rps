@@ -45,26 +45,42 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function game(){
-  let playerScore = 0;
-  let computerScore = 0;
-  for (let i = 0; i < 5; i++){
-      const playerSelection = prompt("Enter your decision here");
-      const computerSelection = getComputerChoice();
-      let round = playRound(playerSelection, computerSelection);
-      let decision = round.slice(0,8);
-      if (decision === "You Win!"){
-          playerScore++;
-      }
-      else{
-          computerScore++;
-      }
-  }
-  if (playerScore > computerScore){
-      return "You win the best of 5 games!";
-  }else{
-      return "You lose the best of 5 games!";
-  }
+let playerScore = 0;
+let computerScore = 0;
+
+function displayScore(result){
+  const playerScoreRef = document.querySelector('.playerScore');
+  const compScoreRef = document.querySelector('.computerScore');
+  const roundRef = document.querySelector('.round-message');
+  playerScoreRef.textContent = `${playerScore}`;
+  compScoreRef.textContent = `${computerScore}`;
+  roundRef.textContent = result
 }
 
-console.log(game());
+function handleMove(playerInput){
+  let computerSelection = getComputerChoice();
+  let result = playRound(playerInput, computerSelection);
+  if (result.includes("You tied")){
+    
+  }
+  else if (result.includes("You Win")){
+    playerScore++
+  }
+  else{
+    computerScore++;
+  }
+  displayScore(result);
+}
+
+displayScore();
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    handleMove(button.className);
+  });
+});
+
+
+
