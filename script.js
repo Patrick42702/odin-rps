@@ -66,5 +66,3 @@ function game(){
       return "You lose the best of 5 games!";
   }
 }
-
-console.log(game());
